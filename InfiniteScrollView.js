@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import ScrollableMixin from 'react-native-scrollable-mixin';
-
 import cloneReferencedElement from 'react-clone-referenced-element';
 
 import DefaultLoadingIndicator from './DefaultLoadingIndicator';
@@ -116,6 +115,8 @@ export default class InfiniteScrollView extends React.Component {
     }
 
     try {
+      if (this.props.allLoaded)
+        return
       this.setState({isDisplayingError: false, isLoading: true});
       await this.props.onLoadMoreAsync();
     } catch (e) {
